@@ -1,7 +1,51 @@
 import React from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { ContextAuthentication } from "../../../../Contexts/Context/AuthContext";
 
 const Navbar = () => {
+  const { user } = useContext(ContextAuthentication);
+  const menuItems = (
+    <>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+          to="/"
+          end
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+          to="/shop"
+        >
+          Shop
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+          to="/blog"
+        >
+          Blog
+        </NavLink>
+      </li>
+      {!user?.email && (
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to="/login"
+            >
+              Sign In
+            </NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
   return (
     <div className="navbar bg-primary lg:px-8">
       <div className="lg:navbar-start flex justify-between w-full">
@@ -26,13 +70,7 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary text-base-100 rounded-box w-52"
           >
-            <li>
-              <NavLink>Item 1</NavLink>
-            </li>
-
-            <li>
-              <NavLink>Item 3</NavLink>
-            </li>
+            {menuItems}
           </ul>
         </div>
 
@@ -41,23 +79,30 @@ const Navbar = () => {
         </Link>
         <div className="navbar-center lg:hidden">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="https://placeimg.com/80/80/people" />
-              </div>
-            </label>
+            {user?.email && (
+              <>
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={
+                        user?.photoURL
+                          ? user.photoURL
+                          : "https://placeimg.com/80/80/people"
+                      }
+                    />
+                  </div>
+                </label>
+              </>
+            )}
             <ul
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
                 <NavLink className="justify-between">
-                  Profile
+                  Dashboard
                   <span className="badge">New</span>
                 </NavLink>
-              </li>
-              <li>
-                <NavLink>Settings</NavLink>
               </li>
               <li>
                 <NavLink>Logout</NavLink>
@@ -67,23 +112,25 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0 text-base-100">
-          <li>
-            <NavLink>Item 1</NavLink>
-          </li>
-
-          <li>
-            <NavLink>Item 3</NavLink>
-          </li>
-        </ul>
+        <ul className="menu menu-horizontal p-0 text-base-100">{menuItems}</ul>
       </div>
       <div className="navbar-end hidden lg:flex">
         <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
-            </div>
-          </label>
+          {user?.email && (
+            <>
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    src={
+                      user?.photoURL
+                        ? user.photoURL
+                        : "https://placeimg.com/80/80/people"
+                    }
+                  />
+                </div>
+              </label>
+            </>
+          )}
           <ul
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"

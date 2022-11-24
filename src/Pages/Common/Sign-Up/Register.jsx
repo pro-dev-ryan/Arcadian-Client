@@ -1,16 +1,41 @@
 import React from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { imageUploader } from "../../../Functions/imageUploader";
+import { useContext } from "react";
+import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
 
 const Register = () => {
   const { handleSubmit, register, reset } = useForm();
+  const { signUpEP, updateInfo } = useContext(ContextAuthentication);
   const handleSign = (data) => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
     const image = data.image[0];
-    console.log(image);
+    const imageurl = imageUploader(image).then((data) => {
+      const url = data.data.display_url;
+      const userData = {
+        name,
+        email,
+        url,
+      };
+      signUpEP(email, password)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          toast.success("user creation successful");
+          updateInfo(name, url)
+            .then()
+            .catch((err) => console.log(err));
+          useNavigate("/");
+        })
+        .catch((err) => {
+          toast.error("Something Went wrong");
+          console.log(err);
+        });
+    });
 
     toast.success("Form Submitted");
   };
@@ -24,7 +49,7 @@ const Register = () => {
               <label htmlFor="name">FullName</label>
               <div className="w-full">
                 <input
-                  {...register("name", { required: true })}
+                  {...register("name", { required: false })}
                   className="w-full"
                   type="text"
                   placeholder="type here"
@@ -35,7 +60,7 @@ const Register = () => {
               <label htmlFor="email">Email</label>
               <div className="w-full">
                 <input
-                  {...register("email", { required: true })}
+                  {...register("email", { required: false })}
                   className="w-full"
                   type="email"
                   placeholder="type here"
@@ -46,7 +71,7 @@ const Register = () => {
               <label htmlFor="password">Password</label>
               <div className="w-full">
                 <input
-                  {...register("password", { required: true })}
+                  {...register("password", { required: false })}
                   className="w-full"
                   type="text"
                   placeholder="type here"
@@ -57,7 +82,7 @@ const Register = () => {
               <label htmlFor="image">Upload Your Image</label>
               <div className="w-full">
                 <input
-                  {...register("image", { required: true })}
+                  {...register("image", { required: false })}
                   className="w-full bg-primary text-base-100 rounded-lg"
                   type="file"
                   name="image"

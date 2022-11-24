@@ -1,18 +1,13 @@
-import { useState } from "react";
-
-export const imageUploader = (data) => {
-  const [imageUrl, setImageUrl] = useState("");
+export const imageUploader = async (data) => {
   const formData = new FormData();
-  formData.append(data);
-  const url = 0125412;
-  fetch(url, {
+  formData.append("image", data, "userPic");
+  const url = `https://api.imgbb.com/1/upload?key=${
+    import.meta.env.VITE_IMGBB_KEY
+  }`;
+  const res = await fetch(url, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: formData,
-  })
-    .then(res.json())
-    .then((data) => setImageUrl(data.data.display_url));
-  return [imageUrl];
+  });
+  const resolve = res.json();
+  return resolve;
 };
