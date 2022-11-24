@@ -1,3 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,800;1,600;1,700&family=Source+Sans+3:wght@500;600&family=Ubuntu:wght@400;500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-6xl text-primary font-bold font-heading;
+  }
+  h2 {
+    @apply text-5xl text-primary font-bold font-heading;
+  }
+  h3 {
+    @apply text-4xl text-primary font-semibold font-heading;
+  }
+  h4 {
+    @apply text-3xl text-primary font-semibold font-heading;
+  }
+  h5 {
+    @apply text-2xl text-primary font-semibold font-heading;
+  }
+  p {
+    @apply text-neutral text-sm lg:text-base font-text;
+  }
+  a {
+    @apply hover:text-secondary font-link lg:text-lg font-bold text-[#eca81e] transition-colors duration-150 capitalize;
+  }
+  .btn-prime {
+    @apply px-4 py-2 font-link lg:text-xl font-bold bg-[#572435] rounded-xl capitalize text-base-100 hover:bg-primary transition-colors duration-200;
+  }
+  input {
+    @apply px-2 py-1 text-lg rounded-lg border border-primary outline-none focus:ring-1 ring-accent capitalize font-text  focus:border-0 transition-all;
+  }
+}
+
+.active {
+  @apply text-secondary font-semibold;
+}

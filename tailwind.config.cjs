@@ -5,16 +5,15 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#42c2ff",
+          primary: "#412234",
 
-          secondary: "#ccbbff",
+          secondary: "#ffc857",
 
-          accent: "#36b1aa",
+          accent: "#bdd9bf",
 
           neutral: "#555",
 
-          "base-100": "#eee",
-          "dark-base": "#123",
+          "base-100": "#f1f1f1",
           error: "#ff5272",
         },
       },
@@ -23,9 +22,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["Rajdhani"],
-        link: ["Tajawal"],
-        text: ['"PT Sans Narrow"'],
+        heading: ["Montserrat"],
+        link: ["'Source Sans 3'"],
+        text: ["Ubuntu"],
       },
     },
   },
