@@ -1,4 +1,3 @@
-import React from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,13 +7,15 @@ import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
 
 const Register = () => {
   const { handleSubmit, register, reset } = useForm();
-  const { signUpEP, updateInfo } = useContext(ContextAuthentication);
+  const navigate = useNavigate();
+  const { signUpEP, updateInfo, user } = useContext(ContextAuthentication);
+  console.log(user);
   const handleSign = (data) => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
     const image = data.image[0];
-    const imageurl = imageUploader(image).then((data) => {
+    imageUploader(image).then((data) => {
       const url = data.data.display_url;
       const userData = {
         name,
@@ -22,23 +23,24 @@ const Register = () => {
         url,
       };
       signUpEP(email, password)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
+        .then((res) => {
+          console.log(res);
           toast.success("user creation successful");
           updateInfo(name, url)
-            .then()
+            .then(() => {
+              console.log("working");
+            })
             .catch((err) => console.log(err));
-          useNavigate("/");
+          navigate("/");
+          reset();
         })
         .catch((err) => {
           toast.error("Something Went wrong");
           console.log(err);
         });
     });
-
-    toast.success("Form Submitted");
   };
+  console.log(user.photoURL);
   return (
     <div className="lg:mx-8 mx-1 flex flex-col justify-center items-center">
       <div className="md:w-96 w-full border-2 border-primary border-opacity-10 bg-base-100 lg:my-10 my-5 flex flex-col gap-1 lg:gap-5 shadow-lg rounded-xl">

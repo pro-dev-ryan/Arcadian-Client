@@ -6,6 +6,7 @@ import {
   updateProfile,
   getAuth,
   GoogleAuthProvider,
+  signOut,
 } from "firebase/auth";
 import { createContext } from "react";
 import { useEffect, useState } from "react";
@@ -14,11 +15,12 @@ import { app } from "../../Authentication/FireBase/Firebase.config";
 export const ContextAuthentication = createContext({});
 
 const AuthContext = ({ children }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
   const signUpEP = (email, password) => {
+    console.log("working");
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -31,23 +33,31 @@ const AuthContext = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log(user);
+    const unsubscribe = onAuthStateChanged(auth, (User) => {
+      setUser(User);
     });
     return () => unsubscribe();
   }, []);
 
   const updateInfo = (name, url) => {
-    return updateProfile(user, { displayName: name, photoURL: url });
+    console.log("update profile", name, url);
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: url,
+    });
   };
 
+  const logout = () => signOut(auth);
+
+  const test = { name: "test1" };
   const contents = {
     signUpEP,
     signUpGoogly,
     login,
     updateInfo,
     user,
+    logout,
+    test,
   };
 
   return (

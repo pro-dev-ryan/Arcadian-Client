@@ -1,11 +1,18 @@
 import React from "react";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import { ContextAuthentication } from "../../../../Contexts/Context/AuthContext";
 
 const Navbar = () => {
-  const { user } = useContext(ContextAuthentication);
-  const menuItems = (
+  const { user, logout } = useContext(ContextAuthentication);
+  const handleSignout = () => {
+    logout()
+      .then(() => toast.success(`${user?.displayName} is Logged Out`))
+      .catch((err) => console.log(err));
+  };
+
+  const MenuItems = (
     <>
       <li>
         <NavLink
@@ -46,6 +53,7 @@ const Navbar = () => {
       )}
     </>
   );
+
   return (
     <div className="navbar bg-primary lg:px-8">
       <div className="lg:navbar-start flex justify-between w-full">
@@ -70,19 +78,19 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary text-base-100 rounded-box w-52"
           >
-            {menuItems}
+            {MenuItems}
           </ul>
         </div>
 
         <Link to="/" className="text-accent capitalize lg:text-2xl">
-          daisyUI
+          Arcadian
         </Link>
         <div className="navbar-center lg:hidden">
           <div className="dropdown dropdown-end">
             {user?.email && (
               <>
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
+                  <div className="w-6 rounded-full">
                     <img
                       src={
                         user?.photoURL
@@ -99,31 +107,31 @@ const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <NavLink className="justify-between">
+                <NavLink to="/dashboard">
+                  {user?.displayName && user?.displayName}
                   Dashboard
-                  <span className="badge">New</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink>Logout</NavLink>
+                <NavLink onClick={handleSignout}>Logout</NavLink>
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0 text-base-100">{menuItems}</ul>
+        <ul className="menu menu-horizontal p-0 text-base-100">{MenuItems}</ul>
       </div>
       <div className="navbar-end hidden lg:flex">
         <div className="dropdown dropdown-end">
           {user?.email && (
             <>
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
+                <div className="w-24 mask mask-squircle">
                   <img
                     src={
                       user?.photoURL
-                        ? user.photoURL
+                        ? `${user.photoURL}`
                         : "https://placeimg.com/80/80/people"
                     }
                   />
@@ -137,15 +145,12 @@ const Navbar = () => {
           >
             <li>
               <NavLink className="justify-between">
-                Profile
-                <span className="badge">New</span>
+                {user?.displayName && user?.displayName}
+                Dashboard
               </NavLink>
             </li>
             <li>
-              <NavLink>Settings</NavLink>
-            </li>
-            <li>
-              <NavLink>Logout</NavLink>
+              <NavLink onClick={handleSignout}>Logout</NavLink>
             </li>
           </ul>
         </div>
