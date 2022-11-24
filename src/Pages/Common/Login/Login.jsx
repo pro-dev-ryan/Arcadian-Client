@@ -9,26 +9,26 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { login, signUpGoogly } = useContext(ContextAuthentication);
+  const { login, signUpGoogly, test } = useContext(ContextAuthentication);
+  console.log(test);
   const logme = (data) => {
     const email = data.email;
-    const password = data.password;
+    const password = data.pass;
     login(email, password)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.user) {
-          toast("succesfully Logged in");
-        }
+      .then((res) => {
+        console.log(res);
+
+        toast("succesfully Logged in");
       })
+
       .catch((err) => console.log(err));
     console.log(data);
   };
 
   const social = () => {
     signUpGoogly()
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.user) {
+      .then((res) => {
+        if (res?.user) {
           toast("succesfully Logged in");
         }
       })

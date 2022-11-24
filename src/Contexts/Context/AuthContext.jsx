@@ -20,7 +20,6 @@ const AuthContext = ({ children }) => {
   const provider = new GoogleAuthProvider();
 
   const signUpEP = (email, password) => {
-    console.log("working");
     return createUserWithEmailAndPassword(auth, email, password);
   };
 

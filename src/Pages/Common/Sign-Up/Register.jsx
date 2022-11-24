@@ -24,15 +24,38 @@ const Register = () => {
       };
       signUpEP(email, password)
         .then((res) => {
-          console.log(res);
-          toast.success("user creation successful");
-          updateInfo(name, url)
-            .then(() => {
-              console.log("working");
+          if (res?.user) {
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify(userData),
             })
-            .catch((err) => console.log(err));
-          navigate("/");
-          reset();
+              .then((res) => res.json())
+              .then((resolved) => {
+                if (resolved?.status) {
+                  toast.success(`${resolved.message}`);
+                  updateInfo(name, url)
+                    .then(() => {
+                      fetch(`http://localhost:5000/issueToken?email=${email}`)
+                        .then((res) => res.json())
+                        .then((resolved) => {
+                          console.log(resolved);
+                          if (resolved?.status) {
+                            localStorage.setItem("userTicket", resolved.token);
+                            navigate("/");
+                            reset();
+                          }
+                        });
+                    })
+                    .catch((err) => console.log(err));
+                } else {
+                  toast.error(`${resolved.message}`);
+                }
+              })
+              .catch((err) => console.error(err));
+          }
         })
         .catch((err) => {
           toast.error("Something Went wrong");
@@ -40,7 +63,6 @@ const Register = () => {
         });
     });
   };
-  console.log(user.photoURL);
   return (
     <div className="lg:mx-8 mx-1 flex flex-col justify-center items-center">
       <div className="md:w-96 w-full border-2 border-primary border-opacity-10 bg-base-100 lg:my-10 my-5 flex flex-col gap-1 lg:gap-5 shadow-lg rounded-xl">

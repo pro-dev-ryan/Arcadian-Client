@@ -89,7 +89,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             {user?.email && (
               <>
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <label tabIndex={0} className="btn-circle avatar">
                   <div className="w-6 rounded-full">
                     <img
                       src={
@@ -108,8 +108,7 @@ const Navbar = () => {
             >
               <li>
                 <NavLink to="/dashboard">
-                  {user?.displayName && user?.displayName}
-                  Dashboard
+                  {user?.displayName && user?.displayName} Dashboard
                 </NavLink>
               </li>
               <li>
@@ -144,13 +143,14 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <NavLink className="justify-between">
-                {user?.displayName && user?.displayName}
-                Dashboard
+              <NavLink className="my-2">
+                {user?.displayName && user?.displayName} Dashboard
               </NavLink>
             </li>
             <li>
-              <NavLink onClick={handleSignout}>Logout</NavLink>
+              <NavLink className="my-2" onClick={handleSignout}>
+                Logout
+              </NavLink>
             </li>
           </ul>
         </div>
