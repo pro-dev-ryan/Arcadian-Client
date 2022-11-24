@@ -8,10 +8,10 @@
     @apply text-6xl text-primary font-bold font-heading;
   }
   h2 {
-    @apply text-5xl text-primary font-bold font-heading;
+    @apply lg:text-5xl text-primary font-bold font-heading;
   }
   h3 {
-    @apply text-4xl text-primary font-semibold font-heading;
+    @apply lg:text-4xl text-xl  text-primary font-semibold font-heading;
   }
   h4 {
     @apply text-3xl text-primary font-semibold font-heading;
@@ -29,7 +29,10 @@
     @apply px-4 py-2 font-link lg:text-xl font-bold bg-[#572435] rounded-xl capitalize text-base-100 hover:bg-primary transition-colors duration-200;
   }
   input {
-    @apply px-2 py-1 text-lg rounded-lg border border-primary outline-none focus:ring-1 ring-accent capitalize font-text  focus:border-0 transition-all;
+    @apply px-2 py-1 text-lg rounded-lg border-opacity-30 shadow-sm border border-primary outline-none focus:ring-1 ring-accent capitalize font-text  focus:border-0 transition-all;
+  }
+  label {
+    @apply text-base lg:text-lg  font-medium font-text my-2;
   }
 }
 

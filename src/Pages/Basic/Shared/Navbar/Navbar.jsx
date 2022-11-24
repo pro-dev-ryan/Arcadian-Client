@@ -27,11 +27,7 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary text-base-100 rounded-box w-52"
           >
             <li>
-              <NavLink
-                {...`${(isActive) => (isActive ? "active" : undefined)}`}
-              >
-                Item 1
-              </NavLink>
+              <NavLink>Item 1</NavLink>
             </li>
 
             <li>
