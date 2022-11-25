@@ -6,8 +6,10 @@ import { useContext } from "react";
 import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import useTitle from "../../../Hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const { login, signUpGoogly, test } = useContext(ContextAuthentication);

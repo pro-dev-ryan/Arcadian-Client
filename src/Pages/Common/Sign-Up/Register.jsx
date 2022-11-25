@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import { imageUploader } from "../../../Functions/imageUploader";
 import { useContext } from "react";
 import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
+import useTitle from "../../../Hooks/useTitle";
 
 const Register = () => {
   const { handleSubmit, register, reset } = useForm();
   const navigate = useNavigate();
+  useTitle("Register");
   const { signUpEP, updateInfo, user } = useContext(ContextAuthentication);
   console.log(user);
   const handleSign = (data) => {
@@ -111,6 +113,17 @@ const Register = () => {
                   type="file"
                   name="image"
                   id="image"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col w-full mt-2">
+              <label htmlFor="image">Buyer</label>
+              <div>
+                <input
+                  type="checkbox"
+                  accept="seller"
+                  className="toggle toggle-sm"
+                  checked
                 />
               </div>
             </div>
