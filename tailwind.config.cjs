@@ -24,7 +24,7 @@ module.exports = {
       fontFamily: {
         heading: ["Montserrat"],
         link: ["'Source Sans 3'"],
-        text: ["Ubuntu"],
+        text: ["Kanit"],
       },
     },
   },

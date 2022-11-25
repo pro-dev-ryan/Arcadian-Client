@@ -1,7 +1,7 @@
 import React from "react";
 import { ImFacebook, ImTwitter } from "react-icons/im";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
 import { useForm } from "react-hook-form";
@@ -9,14 +9,25 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
   const { login, signUpGoogly, test } = useContext(ContextAuthentication);
-  console.log(test);
   const logme = (data) => {
     const email = data.email;
     const password = data.pass;
     login(email, password)
       .then((res) => {
-        console.log(res);
+        if (res?.user) {
+          fetch(`http://localhost:5000/issueToken?email=${res?.user?.email}`)
+            .then((res) => res.json())
+            .then((resolved) => {
+              if (resolved?.status) {
+                localStorage.setItem("userTicket", resolved.token);
+                navigate("/");
+                reset();
+              }
+            })
+            .catch((err) => console.error(err));
+        }
 
         toast("succesfully Logged in");
       })
@@ -29,7 +40,36 @@ const Login = () => {
     signUpGoogly()
       .then((res) => {
         if (res?.user) {
-          toast("succesfully Logged in");
+          const userData = {
+            name: res?.user?.displayName,
+            email: res?.user?.email,
+            url: res?.user?.photoURL,
+          };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          })
+            .then((res) => res.json())
+            .then((resolved) => {
+              if (resolved?.status) {
+                fetch(
+                  `http://localhost:5000/issueToken?email=${res?.user?.email}`
+                )
+                  .then((res) => res.json())
+                  .then((resolved) => {
+                    if (resolved?.status) {
+                      localStorage.setItem("userTicket", resolved.token);
+                      navigate("/");
+                      reset();
+                    }
+                  })
+                  .catch((err) => console.error(err));
+              }
+            });
+          toast.success("succesfully Logged in");
         }
       })
       .catch((err) => console.log(err));

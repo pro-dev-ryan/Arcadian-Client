@@ -46,7 +46,10 @@ const AuthContext = ({ children }) => {
     });
   };
 
-  const logout = () => signOut(auth);
+  const logout = () => {
+    localStorage.removeItem("userTicket");
+    return signOut(auth);
+  };
 
   const test = { name: "test1" };
   const contents = {
