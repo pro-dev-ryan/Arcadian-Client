@@ -6,14 +6,18 @@ import { useContext } from "react";
 import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
 import useTitle from "../../../Hooks/useTitle";
 import { useState } from "react";
+import SmallLoader from "../../../components/smallLoader/SmallLoader";
 
 const Register = () => {
   const [seller, setSeller] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const navigate = useNavigate();
   useTitle("Register");
-  const { signUpEP, updateInfo, user } = useContext(ContextAuthentication);
+  const { signUpEP, updateInfo, user, loader, setLoader } = useContext(
+    ContextAuthentication
+  );
   const handleSign = (data) => {
+    setLoader(true);
     const name = data.name;
     const email = data.email;
     const password = data.password;
@@ -45,24 +49,33 @@ const Register = () => {
                       fetch(`http://localhost:5000/issueToken?email=${email}`)
                         .then((res) => res.json())
                         .then((resolved) => {
-                          console.log(resolved);
                           if (resolved?.status) {
                             localStorage.setItem("userTicket", resolved.token);
+                            setLoader(false);
                             navigate("/");
                             reset();
                           }
                         });
                     })
-                    .catch((err) => console.log(err));
+                    .catch((err) => {
+                      setLoader(false);
+                      toast.error(`${err?.message || err?.statusText}`);
+                      console.log(err);
+                    });
                 } else {
                   toast.error(`${resolved.message}`);
                 }
               })
-              .catch((err) => console.error(err));
+              .catch((err) => {
+                setLoader(false);
+
+                console.error(err);
+              });
           }
         })
         .catch((err) => {
-          toast.error("Something Went wrong");
+          setLoader(false);
+          toast.error(`${resolved.message}`);
           console.log(err);
         });
     });
@@ -131,10 +144,11 @@ const Register = () => {
             </div>
             <div>
               <button
+                disabled={loader ? true : false}
                 onClick={handleSubmit(handleSign)}
                 className="btn-prime mt-10 w-full"
               >
-                Sign Up
+                {loader ? <SmallLoader /> : "Sign Up"}
               </button>
             </div>
             <p className="text-base ">

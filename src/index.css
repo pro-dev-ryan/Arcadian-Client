@@ -23,7 +23,7 @@
     @apply text-neutral text-sm lg:text-base font-text;
   }
   a {
-    @apply hover:text-secondary font-link lg:text-lg font-bold text-[#eca81e] transition-colors duration-150 capitalize;
+    @apply hover:text-secondary font-link lg:text-lg text-sm font-bold text-[#eca81e] transition-colors duration-150 capitalize;
   }
   .btn-prime {
     @apply px-4 py-2 font-link lg:text-xl font-bold bg-[#572435] rounded-xl capitalize text-base-100 hover:bg-primary transition-colors duration-200;

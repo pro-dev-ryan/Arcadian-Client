@@ -6,7 +6,7 @@ const Error = () => {
   useTitle("404 Not Found");
   return (
     <div
-      className="hero relative h-[80vh] lg:h-auto lg:my-3"
+      className="hero relative h-[100vh] lg:h-auto lg:my-3"
       style={{
         backgroundImage: `url(" https://images.hdqwalls.com/download/game-over-typography-4k-pz-1920x1080.jpg")`,
         backgroundSize: "cover",
@@ -14,7 +14,7 @@ const Error = () => {
     >
       {" "}
       <img
-        className="h-80 absolute right-[20%]  "
+        className="lg:h-80 hidden lg:flex  absolute lg:right-[20%]"
         src="https://pngimg.com/uploads/wolverine/wolverine_PNG41.png"
         alt="wolverine"
       />
