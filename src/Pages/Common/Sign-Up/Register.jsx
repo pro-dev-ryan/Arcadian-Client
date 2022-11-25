@@ -5,13 +5,14 @@ import { imageUploader } from "../../../Functions/imageUploader";
 import { useContext } from "react";
 import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
 import useTitle from "../../../Hooks/useTitle";
+import { useState } from "react";
 
 const Register = () => {
+  const [seller, setSeller] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const navigate = useNavigate();
   useTitle("Register");
   const { signUpEP, updateInfo, user } = useContext(ContextAuthentication);
-  console.log(user);
   const handleSign = (data) => {
     const name = data.name;
     const email = data.email;
@@ -23,6 +24,7 @@ const Register = () => {
         name,
         email,
         url,
+        role: seller,
       };
       signUpEP(email, password)
         .then((res) => {
@@ -116,14 +118,14 @@ const Register = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-col w-full mt-2">
-              <label htmlFor="image">Buyer</label>
+            <div>
+              <label htmlFor="image">{seller ? "seller" : "buyer"}</label>
               <div>
                 <input
+                  onChange={() => setSeller(!seller)}
                   type="checkbox"
                   accept="seller"
                   className="toggle toggle-sm"
-                  checked
                 />
               </div>
             </div>

@@ -100,21 +100,21 @@ const Navbar = () => {
                     />
                   </div>
                 </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <NavLink to="/dashboard">
+                      {user?.displayName && user?.displayName} Dashboard
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink onClick={handleSignout}>Logout</NavLink>
+                  </li>
+                </ul>
               </>
             )}
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <NavLink to="/dashboard">
-                  {user?.displayName && user?.displayName} Dashboard
-                </NavLink>
-              </li>
-              <li>
-                <NavLink onClick={handleSignout}>Logout</NavLink>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -136,23 +136,23 @@ const Navbar = () => {
                   />
                 </div>
               </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <NavLink to="/dashboard" className="my-2">
+                    {user?.displayName && user?.displayName} Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="my-2" onClick={handleSignout}>
+                    Logout
+                  </NavLink>
+                </li>
+              </ul>
             </>
           )}
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <NavLink className="my-2">
-                {user?.displayName && user?.displayName} Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="my-2" onClick={handleSignout}>
-                Logout
-              </NavLink>
-            </li>
-          </ul>
         </div>
       </div>
     </div>

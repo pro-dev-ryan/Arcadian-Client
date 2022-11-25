@@ -1,44 +1,69 @@
 import React from "react";
 import { ImFacebook, ImTwitter } from "react-icons/im";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useTitle from "../../../Hooks/useTitle";
+import SmallLoader from "../../../components/smallLoader/SmallLoader";
+import { useState } from "react";
 
 const Login = () => {
+  const [loader, setLoader] = useState(false);
   useTitle("Login");
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
-  const { login, signUpGoogly, test } = useContext(ContextAuthentication);
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const { login, signUpGoogly } = useContext(ContextAuthentication);
   const logme = (data) => {
     const email = data.email;
     const password = data.pass;
-    login(email, password)
-      .then((res) => {
-        if (res?.user) {
-          fetch(`http://localhost:5000/issueToken?email=${res?.user?.email}`)
-            .then((res) => res.json())
-            .then((resolved) => {
-              if (resolved?.status) {
-                localStorage.setItem("userTicket", resolved.token);
-                navigate("/");
-                reset();
+    setLoader(true);
+    fetch(`http://localhost:5000/loginuser?email=${email}`)
+      .then((res) => res.json())
+      .then((resolve) => {
+        if (resolve.status) {
+          login(email, password)
+            .then((res) => {
+              if (res?.user) {
+                fetch(
+                  `http://localhost:5000/issueToken?email=${res?.user?.email}`
+                )
+                  .then((res) => res.json())
+                  .then((resolved) => {
+                    if (resolved?.status) {
+                      localStorage.setItem("userTicket", resolved.token);
+                      setLoader(false);
+
+                      reset();
+                      toast("succesfully Logged in");
+                      return navigate(from, { replace: true });
+                    }
+                  })
+                  .catch((err) => {
+                    setLoader(false);
+                    toast.error(`${err?.message || err?.statusText}`);
+                    console.error(err);
+                  });
               }
             })
-            .catch((err) => console.error(err));
+
+            .catch((err) => {
+              setLoader(false);
+              toast.error(`${err?.message || err?.statusText}`);
+              console.log(err);
+            });
         }
-
-        toast("succesfully Logged in");
-      })
-
-      .catch((err) => console.log(err));
-    console.log(data);
+        // setLoader(false);
+        // toast.error(`${resolve?.message}`);
+      });
   };
 
   const social = () => {
+    setLoader(true);
     signUpGoogly()
       .then((res) => {
         if (res?.user) {
@@ -64,17 +89,24 @@ const Login = () => {
                   .then((resolved) => {
                     if (resolved?.status) {
                       localStorage.setItem("userTicket", resolved.token);
+                      setLoader(false);
                       navigate("/");
                       reset();
                     }
                   })
-                  .catch((err) => console.error(err));
+                  .catch((err) => {
+                    setLoader(false);
+                    console.error(err);
+                  });
               }
             });
           toast.success("succesfully Logged in");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoader(false);
+        console.log(err);
+      });
   };
   return (
     <div className="lg:mx-8 mx-1 flex flex-col justify-center items-center">
@@ -108,7 +140,9 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <button className="btn-prime mt-10 w-full">Login</button>
+              <button className="btn-prime relative mt-10 w-full">
+                {loader ? <SmallLoader /> : "Login"}
+              </button>
             </div>
             <p className="text-base ">
               New Here?{" "}

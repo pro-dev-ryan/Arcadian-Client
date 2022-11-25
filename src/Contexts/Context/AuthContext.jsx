@@ -16,30 +16,37 @@ export const ContextAuthentication = createContext({});
 
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loader, setLoader] = useState(true);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
   const signUpEP = (email, password) => {
+    setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signUpGoogly = () => {
+    setLoader(true);
     return signInWithPopup(auth, provider);
   };
 
   const login = (email, password) => {
+    setLoader(true);
+
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (User) => {
       setUser(User);
+      setLoader(false);
     });
     return () => unsubscribe();
   }, []);
 
   const updateInfo = (name, url) => {
-    console.log("update profile", name, url);
+    setLoader(true);
+
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: url,
@@ -47,6 +54,7 @@ const AuthContext = ({ children }) => {
   };
 
   const logout = () => {
+    setLoader(true);
     localStorage.removeItem("userTicket");
     return signOut(auth);
   };
@@ -60,6 +68,8 @@ const AuthContext = ({ children }) => {
     user,
     logout,
     test,
+    loader,
+    setLoader,
   };
 
   return (
