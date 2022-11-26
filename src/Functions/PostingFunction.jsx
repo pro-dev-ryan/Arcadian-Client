@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 import Loader from "../components/Loader/Loader";
-export const Poster = (paths, body) => {
+
+const PostingFunction = ({ paths, body }) => {
   const url = `http://localhost:5000/${paths}`;
   const { data, isLoading } = useQuery({
     queryKey: ["user", "product"],
@@ -16,3 +17,5 @@ export const Poster = (paths, body) => {
   }
   return data;
 };
+
+export default PostingFunction;

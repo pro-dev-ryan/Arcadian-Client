@@ -11,7 +11,6 @@ import SmallLoader from "../../../components/smallLoader/SmallLoader";
 const Register = () => {
   const [seller, setSeller] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [prop, setProp] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const navigate = useNavigate();
   useTitle("Register");
