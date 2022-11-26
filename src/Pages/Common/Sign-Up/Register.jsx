@@ -10,12 +10,12 @@ import SmallLoader from "../../../components/smallLoader/SmallLoader";
 
 const Register = () => {
   const [seller, setSeller] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [prop, setProp] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const navigate = useNavigate();
   useTitle("Register");
-  const { signUpEP, updateInfo, user, loader, setLoader } = useContext(
-    ContextAuthentication
-  );
+  const { signUpEP, updateInfo, user } = useContext(ContextAuthentication);
   const handleSign = (data) => {
     setLoader(true);
     const name = data.name;
