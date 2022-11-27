@@ -11,7 +11,6 @@ const PrivateRoute = ({ children }) => {
     return <Loader />;
   }
   if (user && user?.email) {
-    console.log("working");
     return children;
   }
   return <Navigate to="/login" state={{ from: location }} replace />;

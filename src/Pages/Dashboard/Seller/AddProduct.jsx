@@ -195,7 +195,7 @@ const AddProduct = () => {
                   <input
                     {...register("contact", { required: true })}
                     className="w-full"
-                    type="tel"
+                    type="number"
                     placeholder="type here"
                   />
                 </div>

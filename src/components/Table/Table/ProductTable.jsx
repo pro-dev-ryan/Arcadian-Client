@@ -1,8 +1,8 @@
 import React from "react";
-import Row from "./Row/Row";
+import ProductRow from "./Row/ProductRow";
 
-const Table = ({ data }) => {
-  const users = data?.result;
+const ProductTable = ({ products }) => {
+  const product = products?.result;
   return (
     <div className="overflow-x-auto w-full">
       <table className="table table-compact w-full">
@@ -23,8 +23,8 @@ const Table = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {users?.map((info, i) => (
-            <Row key={i} info={info} />
+          {product?.map((info, i) => (
+            <ProductRow key={i} info={info} />
           ))}
         </tbody>
       </table>
@@ -32,4 +32,4 @@ const Table = ({ data }) => {
   );
 };
 
-export default Table;
+export default ProductTable;

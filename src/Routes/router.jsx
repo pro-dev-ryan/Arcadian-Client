@@ -31,6 +31,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "/shop",
+        loader: () => fetch("http://localhost:5000/category"),
+        element: (
+          <PrivateRoute>
+            <Shop />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/shop/:category",
+        loader: (params) => fetch(`http://localhost:5000/${params.category}`),
         element: (
           <PrivateRoute>
             <Shop />

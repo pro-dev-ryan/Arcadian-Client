@@ -3,8 +3,10 @@ import "./Loader.css";
 
 const Loader = () => {
   return (
-    <div className="loader">
-      <div className="inner"></div>
+    <div className="bg-primary w-full h-[100vh]">
+      <div className="loader">
+        <div className="inner"></div>
+      </div>
     </div>
   );
 };
