@@ -1,21 +1,20 @@
 import React from "react";
-import { useQuery } from "react-query";
+import { useLoaderData } from "react-router-dom";
+import Card from "../../../../components/ProductCard/Card/Card";
 
 const Category = () => {
-  const { cards, isLoading } = useQuery({
-    queryKey: ["cards"],
-    queryFn: (async = () =>
-      axios.get(`http://localhost:5000/shop/${data}`)).catch((err) =>
-      console.log(err)
-    ),
-  });
-  console.log(cards);
-
+  const data = useLoaderData();
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-      {category.map((product, i) => (
-        <Card key={i} product={product} />
-      ))}
+    <div className="lg:mx-8 my-2 flex flex-col gap-4">
+      <h2>{data?.data}</h2>
+      <h4>
+        {data.result.length} {data.result.length > 1 ? "Consoles" : "Console"}
+      </h4>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mb-5">
+        {data?.result?.map((product, i) => (
+          <Card key={i} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

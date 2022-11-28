@@ -3,6 +3,7 @@ import DashoboardLayout from "../Layouts/DashoboardLayout";
 import Main from "../Layouts/Main";
 import Blog from "../Pages/Basic/Blog/Blog";
 import Home from "../Pages/Basic/Home/Home";
+import Category from "../Pages/Basic/Shop/Category/Category";
 import Shop from "../Pages/Basic/Shop/Shop";
 import Error from "../Pages/Common/Error/Error";
 import Login from "../Pages/Common/Login/Login";
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/shop",
-        loader: () => fetch("http://localhost:5000/category"),
+        loader: () => fetch("http://localhost:5000/allproducts"),
         element: (
           <PrivateRoute>
             <Shop />
@@ -39,11 +40,12 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/shop/:category",
-        loader: (params) => fetch(`http://localhost:5000/${params.category}`),
+        path: "/shop/category/:type",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/shop/category/${params.type}`),
         element: (
           <PrivateRoute>
-            <Shop />
+            <Category />
           </PrivateRoute>
         ),
       },
