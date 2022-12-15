@@ -1,5 +1,6 @@
 import React from "react";
 import useTitle from "../../../Hooks/useTitle";
+<<<<<<< HEAD
 import AdvertiseProduct from "./sections/AdvertiseProduct";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
@@ -26,6 +27,15 @@ const Home = () => {
     <div className="overflow-hidden">
       <Hero />
       {data?.status && <AdvertiseProduct data={data} />}
+=======
+import Hero from "./sections/Hero";
+
+const Home = () => {
+  useTitle("Home");
+  return (
+    <div>
+      <Hero />
+>>>>>>> 65407b04e6a09f1700d04719394131d24a758880
     </div>
   );
 };

@@ -14,10 +14,17 @@
     @apply lg:text-4xl text-xl  text-primary font-semibold font-heading;
   }
   h4 {
+<<<<<<< HEAD
     @apply lg:text-3xl text-primary font-semibold font-heading;
   }
   h5 {
     @apply lg:text-2xl text-primary font-semibold font-heading;
+=======
+    @apply text-3xl text-primary font-semibold font-heading;
+  }
+  h5 {
+    @apply text-2xl text-primary font-semibold font-heading;
+>>>>>>> 65407b04e6a09f1700d04719394131d24a758880
   }
   p {
     @apply text-neutral text-sm lg:text-base font-text;
@@ -26,7 +33,11 @@
     @apply hover:text-secondary font-link lg:text-lg text-sm font-bold text-[#eca81e] transition-colors duration-150 capitalize;
   }
   .btn-prime {
+<<<<<<< HEAD
     @apply px-4 py-2 font-link lg:text-xl cursor-pointer font-bold bg-[#572435] rounded-xl capitalize text-base-100 hover:bg-primary transition-colors duration-200;
+=======
+    @apply px-4 py-2 font-link lg:text-xl font-bold bg-[#572435] rounded-xl capitalize text-base-100 hover:bg-primary transition-colors duration-200;
+>>>>>>> 65407b04e6a09f1700d04719394131d24a758880
   }
   input {
     @apply px-2 py-1 text-lg rounded-lg border-opacity-30 shadow-sm border border-primary outline-none focus:ring-1 ring-accent capitalize font-text  focus:border-0 transition-all;

@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { useContext } from "react";
 import { ContextAuthentication } from "../../Contexts/Context/AuthContext";
 import axios from "axios";
@@ -26,6 +27,19 @@ const Dashboard = () => {
             What are you gonna {info?.role === "seller" ? "Sell" : "Buy"} today?
           </h4>
         )}
+=======
+import Table from "../../components/Table/Table/Table";
+import { Query } from "../../Functions/GetQuery";
+
+const Dashboard = () => {
+  const email = "sam@son.com";
+  Query("testpost", email);
+  return (
+    <div>
+      <h3>This is DashBoard</h3>
+      <div>
+        <Table />
+>>>>>>> 65407b04e6a09f1700d04719394131d24a758880
       </div>
     </div>
   );
