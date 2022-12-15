@@ -1,0 +1,67 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+const Card = ({ product }) => {
+  const {
+    name,
+    brand,
+    img,
+    location,
+    sellerName,
+    op,
+    rp,
+    sold,
+    type,
+    description,
+    _id,
+    verify,
+    booked,
+  } = product;
+  return (
+    <div className="card md:w-96 shadow-xl image-full">
+      <div className="absolute hero-overlay rounded-xl bg-black opacity-70"></div>
+      <figure>
+        <img src={img} alt="Shoes" />
+      </figure>
+      <div className="card-body px-2 lg:px-6">
+        <div className="text-sm font-heading p-1">
+          {verify ? "Verified Seller" : "Unverified Seller"}
+        </div>
+        <span className="badge badge-primary text-accent">Brand: {brand} </span>
+        <h5 className="text-accent">Title: {name}</h5>
+        <span className="bg-accent text-primary font-medium rounded-bl-2xl rounded-tr-2xl w-fit p-1 font-text">
+          Seller: {sellerName}
+        </span>
+        <span className="text-base-100 rounded-bl-2xl rounded-tr-2xl w-fit p-1 text-xs font-link">
+          Status: {sold ? "sold" : "available"}
+        </span>
+        <span
+          style={booked ? { color: "#f1ad25" } : { color: "inherit" }}
+          className="text-base-100 rounded-bl-2xl rounded-tr-2xl w-fit p-1 text-xs font-link"
+        >
+          Booking: {booked ? "already booked" : "available"}
+        </span>
+        <p className="text-base-100 text-xl">Location: {location}</p>
+        <p className="text-secondary">Type: {type}</p>
+        <p className="text-secondary">Brand New Price: {op} $</p>
+        <p className="text-secondary">Resale Price: {rp} $</p>
+        <p className="text-base-100">{description}</p>
+        <div className="card-actions justify-between">
+          {booked === true || (
+            <Link to={`/shop/book/${_id}`} className="btn-prime">
+              Book Now
+            </Link>
+          )}
+          <Link
+            to={`/shop/product/${_id}`}
+            className="px-4 py-2 font-link lg:text-xl cursor-pointer font-bold bg-secondary rounded-xl capitalize text-primary  hover:text-primary hover:bg-[#f1ad25] transition-colors duration-200"
+          >
+            View Details
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Card;
