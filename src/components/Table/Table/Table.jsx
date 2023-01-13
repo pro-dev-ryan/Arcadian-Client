@@ -1,13 +1,7 @@
 import React from "react";
-<<<<<<< HEAD
 import UserRow from "./Row/UserRow";
 
 const Table = ({ data, handleDelete, handleVerify }) => {
-=======
-import Row from "./Row/Row";
-
-const Table = ({ data }) => {
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
   const users = data?.result;
   return (
     <div className="overflow-x-auto w-full">
@@ -30,16 +24,12 @@ const Table = ({ data }) => {
         </thead>
         <tbody>
           {users?.map((info, i) => (
-<<<<<<< HEAD
             <UserRow
               key={i}
               info={info}
               handleDelete={handleDelete}
               handleVerify={handleVerify}
             />
-=======
-            <Row key={i} info={info} />
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
           ))}
         </tbody>
       </table>

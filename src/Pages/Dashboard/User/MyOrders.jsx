@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
@@ -53,14 +52,6 @@ const MyOrders = () => {
       <div>
         <OrderTable infos={infos} handleDel={handleDel} />
       </div>
-=======
-import React from "react";
-
-const MyOrders = () => {
-  return (
-    <div>
-      <h3>user orders will be here</h3>
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
     </div>
   );
 };

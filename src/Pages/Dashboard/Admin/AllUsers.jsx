@@ -1,6 +1,5 @@
 import React from "react";
 import Loader from "../../../components/Loader/Loader";
-<<<<<<< HEAD
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -65,20 +64,6 @@ const AllUsers = () => {
       });
   };
 
-=======
-import { useQuery } from "react-query";
-import axios from "axios";
-import Table from "../../../components/Table/Table/Table";
-const AllUsers = () => {
-  const headers = { authorization: `${localStorage.getItem("userTicket")}` };
-  const { data, isLoading } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () =>
-      await axios.get("http://localhost:5000/dashboard/admin/alluser", {
-        headers,
-      }),
-  });
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
   if (isLoading) {
     return <Loader />;
   }
@@ -86,15 +71,11 @@ const AllUsers = () => {
     <div>
       <h4>Admin sees all the users here!!</h4>
       <div>
-<<<<<<< HEAD
         <Table
           data={data?.data}
           handleDelete={handleDelete}
           handleVerify={handleVerify}
         />
-=======
-        <Table data={data?.data} />
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
       </div>
     </div>
   );

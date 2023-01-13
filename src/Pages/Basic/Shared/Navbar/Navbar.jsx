@@ -90,11 +90,7 @@ const Navbar = () => {
             {user?.email && (
               <>
                 <label tabIndex={0} className="btn-circle avatar">
-<<<<<<< HEAD
                   <div className="w-20 rounded-full">
-=======
-                  <div className="w-6 rounded-full">
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                     <img
                       src={
                         user?.photoURL

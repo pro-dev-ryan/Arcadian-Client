@@ -13,11 +13,7 @@ const AddProduct = () => {
   const { handleSubmit, register, reset } = useForm();
   useTitle("Add Product");
   const { user } = useContext(ContextAuthentication);
-<<<<<<< HEAD
   const url = `https://arcadian-server.vercel.app/addproduct`;
-=======
-  const url = `http://localhost:5000/addproduct`;
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
   const handleSign = (data) => {
     setLoader(true);
     const name = data.name;

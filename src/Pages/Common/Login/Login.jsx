@@ -22,11 +22,7 @@ const Login = () => {
     const email = data.email;
     const password = data.pass;
     setLoader(true);
-<<<<<<< HEAD
     fetch(`https://arcadian-server.vercel.app/loginuser?email=${email}`)
-=======
-    fetch(`http://localhost:5000/loginuser?email=${email}`)
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
       .then((res) => res.json())
       .then((resolve) => {
         if (resolve.status) {
@@ -34,11 +30,7 @@ const Login = () => {
             .then((res) => {
               if (res?.user) {
                 fetch(
-<<<<<<< HEAD
                   `https://arcadian-server.vercel.app/issueToken?email=${res?.user?.email}`
-=======
-                  `http://localhost:5000/issueToken?email=${res?.user?.email}`
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                 )
                   .then((res) => res.json())
                   .then((resolved) => {
@@ -80,11 +72,7 @@ const Login = () => {
             email: res?.user?.email,
             url: res?.user?.photoURL,
           };
-<<<<<<< HEAD
           fetch("https://arcadian-server.vercel.app/users", {
-=======
-          fetch("http://localhost:5000/users", {
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
             method: "POST",
             headers: {
               "Content-type": "application/json",
@@ -95,11 +83,7 @@ const Login = () => {
             .then((resolved) => {
               if (resolved?.status) {
                 fetch(
-<<<<<<< HEAD
                   `https://arcadian-server.vercel.app/issueToken?email=${res?.user?.email}`
-=======
-                  `http://localhost:5000/issueToken?email=${res?.user?.email}`
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                 )
                   .then((res) => res.json())
                   .then((resolved) => {
@@ -138,11 +122,7 @@ const Login = () => {
               <div className="w-full">
                 <input
                   {...register("email")}
-<<<<<<< HEAD
                   className="w-full lowercase"
-=======
-                  className="w-full"
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                   type="email"
                   placeholder="type here"
                 />
@@ -153,11 +133,7 @@ const Login = () => {
               <div className="w-full">
                 <input
                   {...register("pass")}
-<<<<<<< HEAD
                   className="w-full normal-case"
-=======
-                  className="w-full"
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                   type="text"
                   placeholder="type here"
                 />

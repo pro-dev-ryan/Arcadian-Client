@@ -1,5 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
 import { toast } from "react-hot-toast";
 const ProductRow = ({ info, refetch }) => {
   const handleAdvert = (id) => {
@@ -43,10 +42,6 @@ const ProductRow = ({ info, refetch }) => {
         toast.error(`${data?.message}`);
       });
   };
-=======
-
-const ProductRow = ({ info }) => {
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
   return (
     <tr>
       <th>
@@ -85,15 +80,11 @@ const ProductRow = ({ info }) => {
           {info?.brand}
         </span>
       </td>
-<<<<<<< HEAD
       <td className="text-base font-text">{info?.booked ? "Yes" : "No"}</td>
-=======
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
       <td className="text-base font-semibold">{info?.location}</td>
       <td className="text-base font-text">{info?.rp}</td>
       <td className="text-base font-text">{info?.type}</td>
       <td>
-<<<<<<< HEAD
         {!info?.advertise ? (
           <button
             disabled={info?.booked ? true : false}
@@ -113,15 +104,6 @@ const ProductRow = ({ info }) => {
         >
           Delete
         </button>
-=======
-        <button
-          onClick={() => handleDelete(info?._id)}
-          className="btn btn-accent btn-xs"
-        >
-          Advertise
-        </button>
-        {/* <button className="btn btn-ghost btn-xs">details</button> */}
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
       </td>
     </tr>
   );

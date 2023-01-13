@@ -32,11 +32,7 @@ const Register = () => {
       signUpEP(email, password)
         .then((res) => {
           if (res?.user) {
-<<<<<<< HEAD
             fetch("https://arcadian-server.vercel.app/users", {
-=======
-            fetch("http://localhost:5000/users", {
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
               method: "POST",
               headers: {
                 "Content-type": "application/json",
@@ -49,13 +45,9 @@ const Register = () => {
                   toast.success(`${resolved.message}`);
                   updateInfo(name, url)
                     .then(() => {
-<<<<<<< HEAD
                       fetch(
                         `https://arcadian-server.vercel.app/issueToken?email=${email}`
                       )
-=======
-                      fetch(`http://localhost:5000/issueToken?email=${email}`)
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                         .then((res) => res.json())
                         .then((resolved) => {
                           if (resolved?.status) {
@@ -111,11 +103,7 @@ const Register = () => {
               <div className="w-full">
                 <input
                   {...register("email", { required: false })}
-<<<<<<< HEAD
                   className="w-full lowercase"
-=======
-                  className="w-full"
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                   type="email"
                   placeholder="type here"
                 />
@@ -126,11 +114,7 @@ const Register = () => {
               <div className="w-full">
                 <input
                   {...register("password", { required: false })}
-<<<<<<< HEAD
                   className="w-full lowercase"
-=======
-                  className="w-full"
->>>>>>> 65407b04e6a09f1700d04719394131d24a758880
                   type="text"
                   placeholder="type here"
                 />
