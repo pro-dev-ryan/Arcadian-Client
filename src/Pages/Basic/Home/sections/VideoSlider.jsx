@@ -39,7 +39,7 @@ const VideoSlider = () => {
   ];
   SwiperCore.use([Autoplay, EffectCreative]);
   return (
-    <div className="mx-8 text-center">
+    <div className="mx-8 my-16">
       <h2>What do you Want to play???</h2>
       <div className="mt-10">
         <Swiper

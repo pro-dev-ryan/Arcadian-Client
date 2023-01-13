@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
 import Hero from "./sections/Hero";
 import VideoSlider from "./sections/VideoSlider";
+import ConsoleNews from "./sections/ConsoleNews";
 
 const Home = () => {
   const { data = [], isLoading } = useQuery({
@@ -24,10 +25,11 @@ const Home = () => {
   }
   useTitle("Home");
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden flex flex-col gap-16">
       <Hero />
       {data?.status && <AdvertiseProduct data={data} />}
       <VideoSlider />
+      <ConsoleNews />
     </div>
   );
 };
