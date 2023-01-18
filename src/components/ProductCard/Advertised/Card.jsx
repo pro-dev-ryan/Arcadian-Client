@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion as m } from "framer-motion";
 
-const Card = ({ product }) => {
+const Card = ({ product, childrenVariants }) => {
   const {
     name,
     brand,
@@ -18,7 +19,10 @@ const Card = ({ product }) => {
     booked,
   } = product;
   return (
-    <div className="card md:w-96 shadow-xl image-full">
+    <m.div
+      variants={childrenVariants}
+      className="card md:w-96 shadow-xl image-full"
+    >
       <div className="absolute hero-overlay rounded-xl bg-black opacity-70"></div>
       <figure>
         <img src={img} alt="Shoes" />
@@ -49,7 +53,9 @@ const Card = ({ product }) => {
         <div className="card-actions justify-between">
           {booked === true || (
             <Link to={`/shop/book/${_id}`} className="btn-prime">
-              Book Now
+              <div className="p-2 cursor-pointer custom rounded-xl bg-[#572435]">
+                Book Now
+              </div>
             </Link>
           )}
           <Link
@@ -60,7 +66,7 @@ const Card = ({ product }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </m.div>
   );
 };
 

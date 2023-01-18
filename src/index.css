@@ -26,7 +26,7 @@
     @apply hover:text-secondary font-link lg:text-lg text-sm font-bold text-[#eca81e] transition-colors duration-150 capitalize;
   }
   .btn-prime {
-    @apply px-4 py-2 font-link lg:text-xl cursor-pointer font-bold bg-[#572435] rounded-xl capitalize text-base-100 hover:bg-primary transition-colors duration-200;
+    @apply p-1 font-link lg:text-xl cursor-pointer font-bold bg-[#572435] rounded-xl capitalize text-[#fccb6b] hover:text-white hover:bg-white transition-colors duration-200;
   }
   input {
     @apply px-2 py-1 text-lg rounded-lg border-opacity-30 shadow-sm border border-primary outline-none focus:ring-1 ring-accent capitalize font-text  focus:border-0 transition-all;

@@ -141,7 +141,9 @@ const Login = () => {
             </div>
             <div>
               <button className="btn-prime relative mt-10 w-full">
-                {loader ? <SmallLoader /> : "Login"}
+                <div className="p-2 cursor-pointer other rounded-xl bg-[#572435]">
+                  {loader ? <SmallLoader /> : "Login"}
+                </div>
               </button>
             </div>
             <p className="text-base ">

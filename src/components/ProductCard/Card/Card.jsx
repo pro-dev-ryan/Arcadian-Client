@@ -61,7 +61,9 @@ const Card = ({ product }) => {
         <div className="card-actions justify-between">
           {booked === true || (
             <Link to={`/shop/book/${_id}`} className="btn-prime">
-              Book Now
+              <div className="p-2 cursor-pointer custom rounded-xl bg-[#572435]">
+                Book Now
+              </div>
             </Link>
           )}
           <Link
