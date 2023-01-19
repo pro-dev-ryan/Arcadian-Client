@@ -25,7 +25,7 @@ const Home = () => {
   }
   useTitle("Home");
   return (
-    <div className="overflow-hidden flex flex-col gap-16">
+    <div id="home" className="overflow-hidden flex flex-col gap-16">
       <Hero />
       {data?.status && <AdvertiseProduct data={data} />}
       <VideoSlider />

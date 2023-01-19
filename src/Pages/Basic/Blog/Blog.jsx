@@ -1,12 +1,22 @@
 import React from "react";
 import useTitle from "../../../Hooks/useTitle";
+import { motion as m } from "framer-motion";
 
 const Blog = () => {
+  const shopVariant = {
+    hide: {
+      opacity: 0,
+    },
+    show: {
+      opacity: [0.2, 0.4, 0.6, 0.8, 1],
+      transition: { duration: 1, staggerChildren: 0.5 },
+    },
+  };
   useTitle("Blog");
   return (
-    <div className="lg:mx-8 md:mx-4 mx-2 flex flex-col gap-5">
-      <h2 className="lg:mt-5 md:mt-3  mt-2">Blog</h2>
-      <div className="flex flex-col items-center gap-5 mb-5">
+    <m.div variants={shopVariant} initial="hide" whileInView="show">
+      <h2 className="lg:mt-5 md:mt-3 lg:mx-8 mx-2 mt-2">Blog</h2>
+      <div className="flex flex-col items-center lg:mt-5 gap-5 mb-5">
         {/* question-1 */}
         <div className="lg:w-10/12">
           <div
@@ -118,7 +128,7 @@ const Blog = () => {
           </div>
         </div>
       </div>
-    </div>
+    </m.div>
   );
 };
 

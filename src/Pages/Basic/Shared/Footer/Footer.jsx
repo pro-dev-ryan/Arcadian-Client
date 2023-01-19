@@ -1,15 +1,77 @@
 import React from "react";
-
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { ContextAuthentication } from "../../../../Contexts/Context/AuthContext";
+import { motion as m } from "framer-motion";
 const Footer = () => {
+  const { user } = useContext(ContextAuthentication);
+  const MenuItems = (
+    <>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+          to="/"
+          end
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+          to="/shop"
+        >
+          Shop
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+          to="/blog"
+        >
+          Blog
+        </NavLink>
+      </li>
+      {!user?.email && (
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to="/login"
+            >
+              Sign In
+            </NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
+
+  const footerVariant = {
+    hide: {
+      opacity: 0,
+      y: 200,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { delay: 1, stiffness: 200, staggerChildren: 0.5 },
+    },
+  };
   return (
-    <footer className="footer footer-center p-10 bg-primary text-base-content rounded mt-1">
-      <div className="grid grid-flow-col gap-4">
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
-      </div>
-      <div>
+    <m.footer
+      variants={footerVariant}
+      initial="hide"
+      whileInView="show"
+      className="footer footer-center p-10 bg-primary text-base-content rounded mt-1"
+    >
+      <m.div
+        variants={footerVariant}
+        className="grid grid-flow-col gap-4 list-none"
+      >
+        {MenuItems}
+      </m.div>
+      <m.div variants={footerVariant}>
         <div className="grid grid-flow-col gap-4">
           <a>
             <svg
@@ -45,13 +107,16 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-      </div>
-      <div>
+      </m.div>
+      <div variants={footerVariant}>
         <p className="text-base-100">
-          Copyright © 2022 - All right reserved by ACME Industries Ltd
+          Copyright © 2022 - All right reserved by{" "}
+          <span className="text-accent">
+            <a href="#home">Arcadian</a>
+          </span>
         </p>
       </div>
-    </footer>
+    </m.footer>
   );
 };
 

@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ContextAuthentication } from "../../../Contexts/Context/AuthContext";
+import { motion as m } from "framer-motion";
 
-const Card = ({ product }) => {
+const Card = ({ product, cardVariant }) => {
   const [userVerify, setUserVerify] = useState(false);
   const { user } = useContext(ContextAuthentication);
   const url = `https://arcadian-server.vercel.app/users?email=${user?.email}`;
@@ -30,7 +31,7 @@ const Card = ({ product }) => {
     booked,
   } = product;
   return (
-    <div className="card md:w-96 shadow-xl image-full">
+    <m.div variants={cardVariant} className="card md:w-96 shadow-xl image-full">
       <div className="absolute hero-overlay rounded-xl bg-black opacity-70"></div>
       <figure>
         <img src={img} alt="Shoes" />
@@ -74,7 +75,7 @@ const Card = ({ product }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </m.div>
   );
 };
 

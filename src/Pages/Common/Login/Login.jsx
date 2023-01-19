@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import useTitle from "../../../Hooks/useTitle";
 import SmallLoader from "../../../components/smallLoader/SmallLoader";
 import { useState } from "react";
+import { motion as m } from "framer-motion";
 
 const Login = () => {
   const [loader, setLoader] = useState(false);
@@ -108,8 +109,23 @@ const Login = () => {
         console.log(err);
       });
   };
+
+  const shopVariant = {
+    hide: {
+      opacity: 0,
+    },
+    show: {
+      opacity: [0.2, 0.4, 0.6, 0.8, 1],
+      transition: { duration: 1, staggerChildren: 0.5 },
+    },
+  };
   return (
-    <div className="lg:mx-8 mx-1 flex flex-col justify-center items-center">
+    <m.div
+      variants={shopVariant}
+      initial="hide"
+      whileInView="show"
+      className="lg:mx-8 mx-1 flex flex-col justify-center items-center"
+    >
       <div className="md:w-96 w-full border-2 border-primary border-opacity-10 bg-base-100 lg:my-10 my-5 flex flex-col gap-1 lg:gap-5 shadow-lg rounded-xl">
         <h3 className="text-center uppercase mt-5 lg:mt-16">Login</h3>
         <div>
@@ -181,7 +197,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </m.div>
   );
 };
 
